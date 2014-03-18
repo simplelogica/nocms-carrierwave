@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    carrierwave (0.0.1)
+    nocms-carrierwave (0.0.1)
       rails (~> 4.0.3)
 
 GEM
@@ -84,5 +84,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  carrierwave!
+  nocms-carrierwave!
   sqlite3
