@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318121947) do
+ActiveRecord::Schema.define(version: 20140318133013) do
 
-  create_table "no_cms_carrierwave_image_translations", force: true do |t|
-    t.integer "no_cms_carrierwave_image_id"
+  create_table "no_cms_carrierwave_attachment_translations", force: true do |t|
+    t.integer "no_cms_carrierwave_attachment_id"
     t.string  "locale"
-    t.string  "image"
+    t.string  "attachment"
   end
 
-  add_index "no_cms_carrierwave_image_translations", ["no_cms_carrierwave_image_id"], name: "no_cms_carr_img_on_translations"
+  add_index "no_cms_carrierwave_attachment_translations", ["no_cms_carrierwave_attachment_id"], name: "no_cms_carr_img_on_translations"
 
-  create_table "no_cms_carrierwave_images", force: true do |t|
+  create_table "no_cms_carrierwave_attachments", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
