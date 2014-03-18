@@ -1,3 +1,5 @@
+require 'globalize'
+
 module NoCms
   module Carrierwave
     class Engine < ::Rails::Engine
