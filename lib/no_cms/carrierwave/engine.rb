@@ -1,4 +1,5 @@
 require 'globalize'
+require 'carrierwave'
 
 module NoCms
   module Carrierwave
