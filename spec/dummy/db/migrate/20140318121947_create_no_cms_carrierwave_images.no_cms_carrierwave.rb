@@ -1,7 +1,7 @@
 # This migration comes from no_cms_carrierwave (originally 20140318115123)
 class CreateNoCmsCarrierwaveImages < ActiveRecord::Migration
   def change
-    create_table :no_cms_carrierwave_image do |t|
+    create_table :no_cms_carrierwave_images do |t|
       t.timestamps
     end
 

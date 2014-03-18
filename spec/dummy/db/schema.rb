@@ -13,11 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140318121947) do
 
-  create_table "no_cms_carrierwave_image", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "no_cms_carrierwave_image_translations", force: true do |t|
     t.integer "no_cms_carrierwave_image_id"
     t.string  "locale"
@@ -25,5 +20,10 @@ ActiveRecord::Schema.define(version: 20140318121947) do
   end
 
   add_index "no_cms_carrierwave_image_translations", ["no_cms_carrierwave_image_id"], name: "no_cms_carr_img_on_translations"
+
+  create_table "no_cms_carrierwave_images", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
