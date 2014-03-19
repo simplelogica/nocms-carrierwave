@@ -4,7 +4,7 @@ module NoCms::Carrierwave
 
     # Include RMagick or MiniMagick support:
     # include CarrierWave::RMagick
-    # include CarrierWave::MiniMagick
+    include CarrierWave::MiniMagick
 
     # Choose what kind of storage to use for this uploader:
     storage :file
@@ -31,10 +31,12 @@ module NoCms::Carrierwave
     #   # do something
     # end
 
-    # Create different versions of your uploaded files:
-    # version :thumb do
-    #   process :resize_to_fit => [50, 50]
-    # end
+    # We create all the image versions from the NoCms::Carrierwave configuration
+    NoCms::Carrierwave.images_versions.each do |version_name, size|
+      version version_name, if: :image? do
+        process :resize_to_fit => size
+      end
+    end
 
     # Add a white list of extensions which are allowed to be uploaded.
     # For images you might use something like this:
