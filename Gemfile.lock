@@ -4,7 +4,7 @@ PATH
     nocms-carrierwave (0.0.1)
       carrierwave (~> 0.10, >= 0.10.0)
       globalize (~> 4.0, >= 4.0.0)
-      mini_magick
+      mini_magick (~> 3.7, >= 3.7.0)
       rails (~> 4.0, >= 4.0.3)
 
 GEM
