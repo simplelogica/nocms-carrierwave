@@ -1,6 +1,6 @@
 module NoCms::Carrierwave
   class Attachment < ActiveRecord::Base
-    translates :attachment
+    translates :attachment, :name, :description
 
     accepts_nested_attributes_for :translations
     delegate :attachment, :attachment=, to: :translation
