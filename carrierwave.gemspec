@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = NoCms::Carrierwave::VERSION
   s.authors     = ["Simplelogica"]
   s.email       = ["gems@simplelogica.net"]
-  s.homepage    = "https://github.com/simplelogica/nocms-pages"
+  s.homepage    = "https://github.com/simplelogica/nocms-carrierwave"
   s.summary     = "Adapter for using carrierwave inside NoCms."
   s.description = "This gem includes just a model which can be reused in other models in the app."
 
