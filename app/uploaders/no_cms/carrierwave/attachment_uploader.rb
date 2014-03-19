@@ -48,5 +48,10 @@ module NoCms::Carrierwave
     #   "something.jpg" if original_filename
     # end
 
+
+    def image?(new_file = self.file)
+      new_file.content_type.include? 'image' unless new_file.nil?
+    end
+
   end
 end
