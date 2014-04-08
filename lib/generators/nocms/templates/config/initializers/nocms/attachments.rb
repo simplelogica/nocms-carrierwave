@@ -6,4 +6,7 @@ NoCms::Carrierwave.configure do |config|
   #   thumb: [200, 200]
   # }
 
+  # Here we configure storage option for carrierwave. Default is :file, but if we want to use s3 through Fog we should ser :fog
+  # config.storage = :file
+
 end
