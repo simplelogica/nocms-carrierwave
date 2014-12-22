@@ -45,28 +45,50 @@ describe NoCms::Carrierwave::Attachment do
 
   end
 
-  context 'when saving an animated gif' do
+  context 'when animated gif versions are disabled' do
 
-    let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_animated_image)) }
+    before { NoCms::Carrierwave.disable_animated_gif_versions = true }
 
-    subject { attachment }
+    context 'when saving an animated gif' do
 
-    it "should not create versions" do
-      expect(subject.attachment.thumb.url).to be_nil
+      let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_animated_image)) }
+
+      subject { attachment }
+
+      it "should not create versions" do
+        expect(subject.attachment.thumb.url).to be_nil
+      end
+
     end
 
+    context 'when saving an static gif' do
+
+      let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_static_gif)) }
+
+      subject { attachment }
+
+      it "should create versions" do
+        expect(subject.attachment.thumb.url).to_not eq subject.attachment.url
+        expect(subject.attachment.thumb.url).to_not be_nil
+      end
+    end
   end
 
-  context 'when saving an static gif' do
+  context 'when animated gif versions are disabled' do
 
-    let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_static_gif)) }
+    before { NoCms::Carrierwave.disable_animated_gif_versions = false }
 
-    subject { attachment }
+    context 'when saving an animated gif' do
 
-    it "should create versions" do
-      expect(subject.attachment.thumb.url).to_not eq subject.attachment.url
-      expect(subject.attachment.thumb.url).to_not be_nil
+      let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_animated_image)) }
+
+      subject { attachment }
+
+      it "should create versions" do
+        expect(subject.attachment.thumb.url).to_not eq subject.attachment.url
+        expect(subject.attachment.thumb.url).to_not be_nil
+      end
+
     end
-
   end
 end
