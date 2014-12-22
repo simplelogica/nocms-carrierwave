@@ -61,6 +61,9 @@ module NoCms::Carrierwave
       # If we don't have to avoid animated gif resizing we can return true now
       return true unless NoCms::Carrierwave.disable_animated_gif_versions
 
+      # If we have to avoid it but we don't have a gif we return
+      return true unless new_file.content_type.ends_with? 'gif'
+
       # If we have to disable it we must check if it's animated.
       # In order to do so we collapse the image and see if it has a different size
 
