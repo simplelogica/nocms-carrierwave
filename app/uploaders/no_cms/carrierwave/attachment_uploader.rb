@@ -67,7 +67,10 @@ module NoCms::Carrierwave
       # If we have to disable it we must check if it's animated.
       # In order to do so we collapse the image and see if it has a different size
 
-      image_to_upload = MiniMagick::Image.open(new_file.path)
+      # If we are using fog we need the url instead of the path to get the image
+      image_to_upload = NoCms::Carrierwave.storage == :fog ?
+        MiniMagick::Image.open(new_file.url) :
+        MiniMagick::Image.open(new_file.path)
 
       whole_file_collapsed_size = image_to_upload.collapse!(nil).size
       first_frame_collapsed_size = image_to_upload.collapse!.size
