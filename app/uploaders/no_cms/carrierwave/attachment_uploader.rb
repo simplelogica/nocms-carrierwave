@@ -68,7 +68,7 @@ module NoCms::Carrierwave
       # In order to do so we collapse the image and see if it has a different size
 
       # If we are using fog we need the url instead of the path to get the image
-      image_to_upload = NoCms::Carrierwave.storage == :fog ?
+      image_to_upload = ((NoCms::Carrierwave.storage == :fog) && new_file.respond_to?(:url)) ?
         MiniMagick::Image.open(new_file.url) :
         MiniMagick::Image.open(new_file.path)
 
