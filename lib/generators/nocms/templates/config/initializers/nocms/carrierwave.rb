@@ -9,4 +9,7 @@ NoCms::Carrierwave.configure do |config|
   # Here we configure storage option for carrierwave. Default is :file, but if we want to use s3 through Fog we should ser :fog
   # config.storage = :file
 
+  # Resizing animated gifs can be troubling as it may take a lot of time. By default it's disabled.
+  # config.disable_animated_gif_versions = true
+
 end

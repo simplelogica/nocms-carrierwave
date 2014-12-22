@@ -44,4 +44,51 @@ describe NoCms::Carrierwave::Attachment do
     end
 
   end
+
+  context 'when animated gif versions are disabled' do
+
+    before { NoCms::Carrierwave.disable_animated_gif_versions = true }
+
+    context 'when saving an animated gif' do
+
+      let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_animated_image)) }
+
+      subject { attachment }
+
+      it "should not create versions" do
+        expect(subject.attachment.thumb.url).to be_nil
+      end
+
+    end
+
+    context 'when saving an static gif' do
+
+      let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_static_gif)) }
+
+      subject { attachment }
+
+      it "should create versions" do
+        expect(subject.attachment.thumb.url).to_not eq subject.attachment.url
+        expect(subject.attachment.thumb.url).to_not be_nil
+      end
+    end
+  end
+
+  context 'when animated gif versions are disabled' do
+
+    before { NoCms::Carrierwave.disable_animated_gif_versions = false }
+
+    context 'when saving an animated gif' do
+
+      let(:attachment) { NoCms::Carrierwave::Attachment.create(attributes_for(:no_cms_carrierwave_animated_image)) }
+
+      subject { attachment }
+
+      it "should create versions" do
+        expect(subject.attachment.thumb.url).to_not eq subject.attachment.url
+        expect(subject.attachment.thumb.url).to_not be_nil
+      end
+
+    end
+  end
 end
