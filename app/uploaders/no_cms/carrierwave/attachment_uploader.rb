@@ -33,7 +33,7 @@ module NoCms::Carrierwave
 
     # We create all the image versions from the NoCms::Carrierwave configuration
     NoCms::Carrierwave.images_versions.each do |version_name, size|
-      version version_name, if: :image? do
+      version version_name, if: :image_with_versions? do
         process :resize_to_fit => size
       end
     end
@@ -51,8 +51,26 @@ module NoCms::Carrierwave
     # end
 
 
-    def image?(new_file = self.file)
-      new_file.content_type.include? 'image' unless new_file.nil?
+    def image_with_versions?(new_file = self.file)
+      # If we have no file it's not an image
+      return false if new_file.nil?
+
+      # If it doesn't have an image mimetype is not an image
+      return false unless new_file.content_type.include? 'image'
+
+      # If we don't have to avoid animated gif resizing we can return true now
+      return true unless NoCms::Carrierwave.disable_animated_gif_versions
+
+      # If we have to disable it we must check if it's animated.
+      # In order to do so we collapse the image and see if it has a different size
+
+      image_to_upload = MiniMagick::Image.open(new_file.path)
+
+      whole_file_collapsed_size = image_to_upload.collapse!(nil).size
+      first_frame_collapsed_size = image_to_upload.collapse!.size
+
+      return whole_file_collapsed_size == first_frame_collapsed_size
+
     end
 
   end
