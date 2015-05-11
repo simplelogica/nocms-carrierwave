@@ -50,6 +50,9 @@ module NoCms::Carrierwave
     #   "something.jpg" if original_filename
     # end
 
+    def image?(new_file = self.file)
+      new_file.content_type.include? 'image' unless new_file.nil?
+    end
 
     def image_with_versions?(new_file = self.file)
       # If we have no file it's not an image
