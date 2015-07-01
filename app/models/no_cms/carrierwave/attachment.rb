@@ -17,5 +17,12 @@ module NoCms::Carrierwave
 
     validates :attachment, presence: true
 
+    def dup
+      new_attachment = super
+      self.translations.each do |translation|
+        new_attachment.translation_for(translation.locale).remote_attachment_url = translation.attachment_url
+      end
+      new_attachment
+    end
   end
 end
