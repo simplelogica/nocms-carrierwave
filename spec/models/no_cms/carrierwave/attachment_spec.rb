@@ -91,4 +91,30 @@ describe NoCms::Carrierwave::Attachment do
 
     end
   end
+
+  context 'when duplicating an attachment' do
+
+    let(:attachment_attributes) { attributes_for(:no_cms_carrierwave_attachment) }
+
+    let!(:attachment) { NoCms::Carrierwave::Attachment.create(attachment_attributes) }
+
+    before do
+      # We have to stub the attachment_url, so the image can be duplicated
+      allow_any_instance_of(NoCms::Carrierwave::Attachment::Translation).to receive(:attachment_url).and_return('https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150')
+    end
+
+    subject { attachment.dup }
+
+    it "should save" do
+      expect{subject.save!}.to_not raise_error
+    end
+
+    it "should have the same attachment attributes" do
+      attachment_attributes.each do |attribute_name, attribute_value|
+        # we can't test attachment equalness since it's been stubbed before
+        expect(subject.send(attribute_name)).to eq attribute_value unless attribute_name == :attachment
+      end
+    end
+
+  end
 end
