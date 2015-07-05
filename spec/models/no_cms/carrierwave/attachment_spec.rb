@@ -98,11 +98,6 @@ describe NoCms::Carrierwave::Attachment do
 
     let!(:attachment) { NoCms::Carrierwave::Attachment.create(attachment_attributes) }
 
-    before do
-      # We have to stub the attachment_url, so the image can be duplicated
-      allow_any_instance_of(NoCms::Carrierwave::Attachment::Translation).to receive(:attachment_url).and_return('https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150')
-    end
-
     subject { attachment.dup }
 
     it "should save" do

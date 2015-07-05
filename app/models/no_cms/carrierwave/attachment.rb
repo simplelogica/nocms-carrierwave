@@ -20,7 +20,7 @@ module NoCms::Carrierwave
     def dup
       new_attachment = super
       self.translations.each do |translation|
-        new_attachment.translation_for(translation.locale).remote_attachment_url = translation.attachment_url
+        new_attachment.translation_for(translation.locale).attachment = translation.attachment
       end
       new_attachment
     end
