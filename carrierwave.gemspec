@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", ">= 4.0", '< 5.1'
   s.add_dependency "globalize", '>= 4.0.0', '< 5.1'
-  s.add_dependency "carrierwave", '~> 0.10', '>= 0.10.0'
+  s.add_dependency "carrierwave", ">= 0.10.0", '< 1.2'
   s.add_dependency "mini_magick", '~> 4.0', '>= 4.0.0'
 
   s.add_development_dependency "sqlite3"
